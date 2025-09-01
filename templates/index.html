@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Notebook | Group Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book"></i> Interactive Notebook</h1>
+            <p>Save your thoughts and ideas</p>
+            <div class="group-info">
+                <strong>Group:</strong> Web Warriors | <strong>Members:</strong> 5 | <strong>Project:</strong> Notebook App
+            </div>
+        </header>
+        
+        <div class="app-container">
+            <div class="note-input">
+                <h2><i class="fas fa-edit"></i> Write Your Note</h2>
+                <textarea id="noteText" placeholder="Start typing your note here..."></textarea>
+                <div class="btn-container">
+                    <button id="saveBtn" class="btn">
+                        <i class="fas fa-save"></i> Save Note
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+            </div>
+            
+            <div class="saved-notes">
+                <h2><i class="fas fa-sticky-note"></i> Saved Notes</h2>
+                <ul id="noteList" class="note-list">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-sticky-note"></i>
+                        <p>No notes saved yet. Write your first note above!</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Group Project &copy; 2025 - Web Application Development | Built with Flask</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">Note saved successfully!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const noteText = document.getElementById('noteText');
+            const saveBtn = document.getElementById('saveBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const noteList = document.getElementById('noteList');
+            const emptyState = document.getElementById('emptyState');
+            const notification = document.getElementById('notification');
+            
+            // Sample initial notes (in a real app, these would come from the server)
+            let notes = [
+                "my name is daniel",
+                "atu is my 17th choice",
+                "This is a sample note from the web app"
+            ];
+            
+            // Render notes
+            function renderNotes() {
+                if (notes.length === 0) {
+                    emptyState.style.display = 'block';
+                    noteList.innerHTML = '';
+                    return;
+                }
+                
+                emptyState.style.display = 'none';
+                noteList.innerHTML = '';
+                
+                notes.forEach((note, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'note-item';
+                    
+                    li.innerHTML = `
+                        <div class="note-content">${note}</div>
+                        <div class="note-actions">
+                            <button class="action-btn edit-btn" data-index="${index}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    noteList.appendChild(li);
+                });
+                
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        deleteNote(index);
+                    });
+                });
+                
+                // Add event listeners to edit buttons
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        editNote(index);
+                    });
+                });
+            }
+            
+            // Save a new note
+            function saveNote() {
+                const text = noteText.value.trim();
+                
+                if (text === '') {
+                    alert('Please write something before saving!');
+                    return;
+                }
+                
+                // In a real app, you would send this to the server
+                fetch('/save_note', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ note: text })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        notes.push(text);
+                        noteText.value = '';
+                        showNotification('Note saved successfully!');
+                        renderNotes();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving note. Please try again.');
+                });
+            }
+            
+            // Delete a note
+            function deleteNote(index) {
+                if (confirm('Are you sure you want to delete this note?')) {
+                    // In a real app, you would send this to the server
+                    fetch(`/delete_note/${index}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            notes.splice(index, 1);
+                            showNotification('Note deleted successfully!');
+                            renderNotes();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error deleting note. Please try again.');
+                    });
+                }
+            }
+            
+            // Edit a note
+            function editNote(index) {
+                const newText = prompt('Edit your note:', notes[index]);
+                
+                if (newText !== null && newText.trim() !== '') {
+                    // In a real app, you would send this to the server
+                    fetch(`/update_note/${index}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ note: newText.trim() })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            notes[index] = newText.trim();
+                            showNotification('Note updated successfully!');
+                            renderNotes();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error updating note. Please try again.');
+                    });
+                }
+            }
+            
+            // Show notification
+            function showNotification(message) {
+                notification.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Event listeners
+            saveBtn.addEventListener('click', saveNote);
+            
+            clearBtn.addEventListener('click', function() {
+                noteText.value = '';
+                noteText.focus();
+            });
+            
+            // Allow saving with Ctrl+Enter
+            noteText.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    saveNote();
+                }
+            });
+            
+            // Initial render
+            renderNotes();
+        });
+    </script>
+</body>
+</html>
