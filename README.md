@@ -2,42 +2,60 @@
 
 ## Group Details
 - **Group Name:** Web Warriors
-- **Project:** Interactive Notebook App
+- **Project:** Interactive Notebook App  
 - **Course:** Programming With Python
+- **Institution:** Accra Technical University
+- **Department:** Computer Science
 
 ## Group Members
-1. [Joshua Senyuitor] - [01244997b]
-2. [Jagri Johnson Nkobteen] - [01241791b]
-3. [Prince Samuel Kofi Nyarko] - [01242527b]
-4. [Micheal Ntim] - [01246922b]
-5. [Clement Mawufemor] - [01245686b]
+1. Joshua Senyuitor - 01244997B - Team Lead & Full-stack Development
+2. Jagri Johnson Nkobteen - 01241791B - Backend Development & Deployment
+3. Prince Samuel Kofi Nyarko - 01242527B - Frontend Development & UI Design
+4. Micheal Nitim - 01246922B - Testing & Documentation
+5. Clement Mawufemor - 01245686B - Quality Assurance & Feature Implementation
 
 ## Project Description
-A web-based note-taking application built with Python Flask, HTML, CSS, and JavaScript.
+A modern, responsive web-based note-taking application built with Python Flask that allows users to create, edit, and manage notes efficiently with a clean, intuitive interface.
+
+## Live Application
+🌐 **View Live Demo:** https://tintinwale.pythonanywhere.com/
+
+## GitHub Repository
+📂 **Source Code:** https://github.com/Joshua-01244997b/Web-App-Project
 
 ## Features
-- Create, edit, and delete notes
-- Responsive design that works on mobile and desktop
-- Modern UI with animations
-- Data persistence
+- Create new notes with intuitive text input
+- Edit existing notes with inline modification
+- Delete notes with confirmation dialog
+- View all saved notes in organized list
+- Responsive design for mobile and desktop
+- Modern UI with smooth animations
+- Data persistence across sessions
 
 ## Technologies Used
-- Backend: Python Flask
-- Frontend: HTML5, CSS3, JavaScript
-- Icons: Font Awesome
+- **Backend:** Python 3.8+, Flask 2.0+, Flask-CORS
+- **Frontend:** HTML5, CSS3, JavaScript, Font Awesome
+- **Deployment:** PythonAnywhere, GitHub
+- **Data Storage:** JSON file-based persistence
 
 ## Installation & Setup
-1. Clone this repository: `git clone https://github.com/Joshua-01244997b/Web-App-Project.git`
-2. Install requirements: `pip install flask flask-cors`
-3. Run the application: `python app.py`
-4. Open https://tintinwale.puthonanywhere.com/ in your browser(this is where you can locate the notebook app)
 
-## Live Demo
-[View the live application](https://tintinwale.pythonanywhere.com/) 
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
 
-## View Project
-- **Web URL:** [https://github.com/Joshua-01244997b/Web-App-Project](https://github.com/Joshua-01244997b/Web-App-Project)
+### Local Development
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Joshua-01244997b/Web-App-Project.git
+   cd Web-App-Project
 
-## Download/Clone Project
-```bash
-git clone https://github.com/Joshua-01244997b/Web-App-Project.git
+## Project structure
+-  Main Flask application
+- **Web-App-Project:** app.py
+
+-  Main HTML template
+- **templates:** index.html
+
+-  CSS stylesheet
+- **static:** style.css
