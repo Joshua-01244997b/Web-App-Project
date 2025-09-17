@@ -8,9 +8,9 @@
 ## Group Members
 1. [Joshua Senyuitor] - [01244997b]
 2. [Jagri Johnson Nkobteen] - [01241791b]
-3. [Member 3 Name] - [index number]
-4. [Member 4 Name] - [index number]
-5. [Member 5 Name] - [index number]
+3. [Prince Samuel Kofi Nyarko] - [01242527b]
+4. [Micheal Ntim] - [01246922b]
+5. [Clement Mawufemor] - [01245686b]
 
 ## Project Description
 A web-based note-taking application built with Python Flask, HTML, CSS, and JavaScript.
