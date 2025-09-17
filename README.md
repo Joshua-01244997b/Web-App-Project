@@ -8,7 +8,7 @@
 - **Department:** Computer Science
 
 ## Group Members
-1. Joshua Senyuitor - 01244997B - Team Lead & Full-stack Development
+1. Joshua Senyuitor - 01244997B - Group leader & Full-stack Development
 2. Jagri Johnson Nkobteen - 01241791B - Backend Development & Deployment
 3. Prince Samuel Kofi Nyarko - 01242527B - Frontend Development & UI Design
 4. Micheal Nitim - 01246922B - Testing & Documentation
