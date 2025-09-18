@@ -9,11 +9,11 @@
 
 ## Group Members
 1. Joshua Senyuitor - 01244997B - Group leader & Full-stack Development (Putting codes together and hosting it)
-2. Jagri Johnson Nkobteen - 01241791B - Backend Development & Deployment
-3. Prince Samuel Kofi Nyarko - 01242527B - Frontend Development & UI Design
-4. Micheal Ntim - 01246922B - Testing & Documentation
+2. Jagri Johnson Nkobteen - 01241791B - Backend Development
+3. Prince Samuel Kofi Nyarko - 01242527B - Frontend Development
+4. Micheal Ntim - 01246922B - Testing
 5. Clement Mawufemor - 01245686B - Quality Assurance & Feature Implementation
-6. Gmanyanko Ntelam Clevert - 01240093B - Testing & Documentation
+6. Gmanyanko Ntelam Clevert - 01240093B - Testing
 
 ## Project Description
 A modern, responsive web-based note-taking application built with Python Flask that allows users to create, edit, and manage notes efficiently with a clean, intuitive interface.
